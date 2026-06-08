@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>PM Games</title>
+
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at 10% 20%, #0a0f1e, #03050b);
+    color: #f0f3fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMDMiLz48L3N2Zz4=');
+    background-repeat: repeat;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero {
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    padding: 0 20px;
+  }
+
+  .glitch-wrapper {
+    display: inline-block;
+    position: relative;
+  }
+
+  .glitch-text {
+    font-size: 5rem;
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(135deg, #ffd966, #ffb347);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: glitchShake 0.18s infinite alternate ease-in-out;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ffd966, #ffb347);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .glitch-text::before {
+    animation: glitch-anim-1 1.8s infinite linear alternate-reverse;
+    left: 2px;
+    text-shadow: -2px 0 #ff3366;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  }
+
+  .glitch-text::after {
+    animation: glitch-anim-2 2.1s infinite linear alternate-reverse;
+    left: -2px;
+    text-shadow: 2px 0 #0ff;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  }
+
+  @keyframes glitchShake {
+    0% { transform: translate(0px, 0px) skew(0deg); }
+    20% { transform: translate(-1px, 0.5px) skew(0.5deg); }
+    40% { transform: translate(1px, -0.8px) skew(-0.3deg); }
+    60% { transform: translate(-0.5px, 1px) skew(0.2deg); }
+    80% { transform: translate(0.8px, -0.3px) skew(-0.1deg); }
+    100% { transform: translate(0.2px, 0.2px) skew(0deg); }
+  }
+
+  @keyframes glitch-anim-1 {
+    0% { clip-path: polygon(0 0, 100% 0, 100% 10%, 0 10%); transform: translate(-2px, -1px); }
+    20% { clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%); transform: translate(2px, 1px); }
+    40% { clip-path: polygon(0 35%, 100% 35%, 100% 50%, 0 50%); transform: translate(-1px, 2px); }
+    60% { clip-path: polygon(0 55%, 100% 55%, 100% 70%, 0 70%); transform: translate(1px, -1px); }
+    80% { clip-path: polygon(0 75%, 100% 75%, 100% 90%, 0 90%); transform: translate(-1px, 0px); }
+    100% { clip-path: polygon(0 95%, 100% 95%, 100% 100%, 0 100%); transform: translate(0px, 0px); }
+  }
+
+  @keyframes glitch-anim-2 {
+    0% { clip-path: polygon(0 10%, 100% 10%, 100% 25%, 0 25%); transform: translate(2px, 1px); }
+    25% { clip-path: polygon(0 30%, 100% 30%, 100% 45%, 0 45%); transform: translate(-2px, 0px); }
+    50% { clip-path: polygon(0 50%, 100% 50%, 100% 65%, 0 65%); transform: translate(1px, -1px); }
+    75% { clip-path: polygon(0 70%, 100% 70%, 100% 85%, 0 85%); transform: translate(-1px, 2px); }
+    100% { clip-path: polygon(0 90%, 100% 90%, 100% 100%, 0 100%); transform: translate(1px, -1px); }
+  }
+
+  .icon-strip {
+    width: 100%;
+    overflow: hidden;
+    margin: 2rem 0 3rem;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 1.2rem 0;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(255, 215, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.4);
+    position: relative;
+  }
+
+  .icon-slider {
+    display: flex;
+    gap: 3rem;
+    font-size: 2.6rem;
+    animation: scrollIcons 22s linear infinite;
+    width: max-content;
+  }
+
+
+  .icon-slider i {
+    filter: drop-shadow(0 0 8px #ffaa33) drop-shadow(0 0 2px white);
+    transition: transform 0.2s;
+    color: #ffeaac;
+  }
+
+  .icon-slider i:hover {
+    transform: scale(1.25);
+    color: #ffcc44;
+    filter: drop-shadow(0 0 15px #ff9900);
+  }
+
+  @keyframes scrollIcons {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+
+  .projects-section {
+    width: 90%;
+    max-width: 1300px;
+    margin: 30px auto 50px;
+  }
+
+  .glass-card {
+    background: rgba(12, 20, 30, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 2rem;
+    padding: 2rem 2rem;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 200, 100, 0.3);
+  }
+
+  .section-title {
+    text-align: right;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-right: 5px solid #ffcb5c;
+    padding-right: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  .section-title i {
+    color: #ffcb5c;
+    font-size: 2rem;
+  }
+
+  .projects-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .project-card {
+    background: linear-gradient(145deg, #1e2a3a, #0f1722);
+    border-radius: 1.5rem;
+    padding: 1.3rem 1.2rem;
+    width: 230px;
+    transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    border: 1px solid rgba(255, 210, 90, 0.3);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: #ffcd6b;
+    box-shadow: 0 20px 30px -8px black, 0 0 18px rgba(255, 200, 50, 0.5);
+    background: linear-gradient(145deg, #253544, #121b28);
+  }
+
+  .project-icon {
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+    display: inline-block;
+  }
+
+  .project-card h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(120deg, #fff3c9, #ffdd99);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-link {
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 12px;
+    font-weight: 600;
+    color: #ffdd99;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    border: 1px solid rgba(255, 210, 90, 0.5);
+  }
+
+  .project-link i {
+    margin-left: 5px;
+    font-size: 0.8rem;
+  }
+
+  .project-link:hover {
+    background: #ffc857;
+    color: #0a0f1e;
+    border-color: #ffc857;
+    box-shadow: 0 0 12px #ffb82e;
+  }
+
+  .neon-footer {
+    margin-top: 2rem;
+    padding: 1.8rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 205, 100, 0.2);
+    width: 100%;
+    backdrop-filter: blur(4px);
+    letter-spacing: 1px;
+  }
+
+  .neon-footer p {
+    color: #abb7d4;
+  }
+
+  .glow-text {
+    color: #ffcf7a;
+    text-shadow: 0 0 4px #ffae2e;
+  }
+
+  @media (max-width: 780px) {
+    .project-card {
+      width: 200px;
+      padding: 1rem;
+    }
+    .project-card h3 {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .glitch-text {
+      font-size: 2.8rem;
+      letter-spacing: 3px;
+    }
+    .section-title {
+      font-size: 1.7rem;
+    }
+    .project-card {
+      width: 170px;
+    }
+    .icon-slider {
+      font-size: 2rem;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .projects-grid {
+      gap: 1rem;
+    }
+    .project-card {
+      width: 150px;
+    }
+    .glitch-text {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="content">
+  <div class="hero">
+    <div class="glitch-wrapper">
+      <h1 class="glitch-text" data-text="PM GAMES">PM GAMES</h1>
+    </div>
+  </div>
+
+  <div class="icon-strip">
+    <div class="icon-slider">
+
+      <i class="fas fa-gamepad"></i> <i class="fas fa-dice-d6"></i> <i class="fas fa-headset"></i>
+      <i class="fas fa-robot"></i> <i class="fas fa-bolt"></i> <i class="fas fa-crown"></i>
+      <i class="fas fa-fire"></i> <i class="fab fa-fort-awesome"></i> <i class="fas fa-code-branch"></i>
+      <i class="fas fa-globe"></i> <i class="fas fa-chess-queen"></i> <i class="fas fa-microchip"></i>
+      <i class="fas fa-skull-crossbones"></i> <i class="fas fa-dragon"></i> <i class="fas fa-meteor"></i>
+      <i class="fas fa-ghost"></i> <i class="fas fa-trophy"></i> <i class="fas fa-joystick"></i>
+
+      <i class="fas fa-gamepad"></i> <i class="fas fa-dice-d6"></i> <i class="fas fa-headset"></i>
+      <i class="fas fa-robot"></i> <i class="fas fa-bolt"></i> <i class="fas fa-crown"></i>
+      <i class="fas fa-fire"></i> <i class="fab fa-fort-awesome"></i> <i class="fas fa-code-branch"></i>
+      <i class="fas fa-globe"></i> <i class="fas fa-chess-queen"></i> <i class="fas fa-microchip"></i>
+      <i class="fas fa-skull-crossbones"></i> <i class="fas fa-dragon"></i> <i class="fas fa-meteor"></i>
+      <i class="fas fa-ghost"></i> <i class="fas fa-trophy"></i> <i class="fas fa-joystick"></i>
+    </div>
+  </div>
+
+  <section class="projects-section">
+    <div class="glass-card">
+      <div class="section-title">
+        <i class="fas fa-gamepad"></i>
+        <span>پروژه‌های بازی</span>
+      </div>
+      <div class="projects-grid" id="projectsContainer">
+        <div class="project-card">
+          <div class="project-icon">🎨</div>
+          <h3>PhotoShop</h3>
+          <a href="https://pmgames.ir/photoshop" class="project-link" target="_blank">Start <i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="project-card">
+          <div class="project-icon">⚔️</div>
+          <h3>Online Arena</h3>
+          <a href="https://pmgames.ir/arena" class="project-link" target="_blank">Start <i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="project-card">
+          <div class="project-icon">🏹</div>
+          <h3>Bedwars</h3>
+          <a href="https://pmgames.ir/bedwars" class="project-link" target="_blank">Start <i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="project-card">
+          <div class="project-icon">🤖</div>
+          <h3>Uno</h3>
+          <a href="https://pmgames.ir/Robo-war" class="project-link" target="_blank">Start <i class="fas fa-arrow-left"></i></a>
+        </div>
+
+      </div>
+      <div style="margin-top: 30px; text-align: center; font-size: 0.85rem; border-top: 1px dashed rgba(255,210,90,0.3); padding-top: 18px;">
+        <i class="fas fa-plus-circle" style="color: #ffcb5c;"></i> بازی‌های جدید به زودی اضافه می‌شوند
+      </div>
+    </div>
+  </section>
+
+  <footer class="neon-footer">
+    <p>© 2026 PM Games — <span class="glow-text">همیشه در حال تکامل</span> <i class="fas fa-cogs"></i></p>
+    <p style="font-size: 0.7rem; margin-top: 8px;">PM Games</p>
+  </footer>
+</div>
+
+<script>
+  (function() {
+    // ========== افکت لرزش بیشتر روی PM GAMES ==========
+    const glitchEl = document.querySelector('.glitch-text');
+    if(glitchEl) {
+      setInterval(() => {
+        if(Math.random() > 0.65) {
+          glitchEl.style.transform = `translate(${(Math.random() - 0.5) * 1.6}px, ${(Math.random() - 0.5) * 1.4}px)`;
+          setTimeout(() => {
+            glitchEl.style.transform = '';
+          }, 65);
+        }
+      }, 250);
+    }
+    
+    // ========== جلوه hover نئون روی کارت‌ها ==========
+    const cards = document.querySelectorAll('.project-card');
+    function attachNeon(card) {
+      card.addEventListener('mouseenter', () => {
+        const hue = Math.floor(Math.random() * 35) + 45;
+        card.style.borderColor = `hsl(${hue}, 100%, 60%)`;
+        card.style.boxShadow = `0 0 22px rgba(255, 180, 50, 0.8)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.borderColor = 'rgba(255, 210, 90, 0.3)';
+        card.style.boxShadow = '0 10px 20px -5px rgba(0, 0, 0, 0.5)';
+      });
+    }
+    cards.forEach(attachNeon);
+    
+    // ========== توقف نوار هنگام هاور ==========
+    const strip = document.querySelector('.icon-strip');
+    const slider = document.querySelector('.icon-slider');
+    if(strip && slider) {
+      strip.addEventListener('mouseenter', () => slider.style.animationPlayState = 'paused');
+      strip.addEventListener('mouseleave', () => slider.style.animationPlayState = 'running');
+    }
+    
+    // ========== تابع اضافه کردن بازی جدید (برای توسعه‌دهنده) ==========
+    window.addGame = function(name, url, emoji = '🎮') {
+      const container = document.getElementById('projectsContainer');
+      if(!container) return;
+      const newCard = document.createElement('div');
+      newCard.className = 'project-card';
+      newCard.innerHTML = `
+        <div class="project-icon">${emoji}</div>
+        <h3>${name}</h3>
+        <a href="${url}" class="project-link" target="_blank">بازی کن <i class="fas fa-arrow-left"></i></a>
+      `;
+      container.appendChild(newCard);
+      attachNeon(newCard);
+    };
+    
+  })();
+</script>
+</body>
+</html>
